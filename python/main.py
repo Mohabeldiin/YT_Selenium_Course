@@ -1,6 +1,7 @@
 import unittest
+from unittest.main import main
 from selenium import webdriver
-#import page
+import page
 
 class pythonOrgSearch(unittest.TestCase):
 
@@ -9,6 +10,22 @@ class pythonOrgSearch(unittest.TestCase):
         """This setUp will Run at Beging of each Test"""
         self.driver = webdriver.Chrome("C:\\Program Files (x86)\\chromedriver.exe")
         self.driver.get("http://www.python.org")
+
+
+    def test_search_python(self):
+        """This test will check the search functionality"""
+        mainPage = page.MainPage(self.driver)
+        assert mainPage.is_title_matches()
+        mainPage.search_text_element = "pycon"
+        mainPage.click_go_button()
+        SearchResultsPage = page.SearchResultsPage(self.driver)
+        assert SearchResultsPage.is_results_found()
+
+
+    def test_title(self):
+        """This test will check the title of the page"""
+        mainPage = page.MainPage(self.driver)
+        assert mainPage.is_title_matches()
 
 
     # def test_example():
