@@ -1,4 +1,5 @@
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
 class BasePageElement(object):
     """Base page class that is initialized on every page object class."""
@@ -12,9 +13,9 @@ class BasePageElement(object):
             """
         driver = obj.driver
         WebDriverWait(driver, 100).until(
-            lambda driver: driver.find_element_by_name(self.locator))
-        driver.find_element_by_name(self.locator).clear()
-        driver.find_element_by_name(self.locator).send_keys(value)
+            lambda driver: driver.find_element(By.NAME,self.locator))
+        driver.find_element(By.NAME,self.locator).clear()
+        driver.find_element(By.NAME,self.locator).send_keys(value)
 
     
     def __get__(self, obj, owner):
@@ -28,6 +29,6 @@ class BasePageElement(object):
             """ 
         driver = obj.driver
         WebDriverWait(driver, 100).until(
-            lambda driver: driver.find_element_by_name(self.locator))
-        element = driver.find_element_by_name(self.locator)
+            lambda driver: driver.find_element(By.NAME,self.locator))
+        element = driver.find_element(By.NAME,self.locator)
         return element.get_attribute("value")
