@@ -16,3 +16,8 @@ class pythonOrgSearch(unittest.TestCase):
         """This test will check the title of the page"""
         mainPage = page.MainPage(self.driver)
         assert mainPage.is_title_matches()
+
+    
+    def tearDown(self):
+        """This TearDown will Run at the End of each Test"""
+        self.driver.close()
